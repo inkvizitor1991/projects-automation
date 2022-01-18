@@ -37,7 +37,7 @@ class Student(models.Model):
     )
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} Категория:{self.category.name} Дальний восток-{self.far_east}"
+        return f"{self.first_name} {self.last_name}"
 
     class Meta:
         verbose_name = 'Студент'

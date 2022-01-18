@@ -1,10 +1,26 @@
 from django.contrib import admin
 from .models import (
-     Category,
+    Category,
     Student, ProjectManager,
     Command, ParticipantProject
 )
 
+
+
+
+
+@admin.register(Student)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = [
+        'first_name',
+        'last_name',
+        'category',
+        'far_east',
+    ]
+    list_filter = [
+        'category',
+        'far_east'
+    ]
 
 
 
@@ -15,13 +31,14 @@ class ParticipantProjectInline(admin.TabularInline):
 
 
 class CommandAdmin(admin.ModelAdmin):
-
     inlines = [
         ParticipantProjectInline
     ]
 
+
+
+
 admin.site.register(Command, CommandAdmin)
 admin.site.register(Category)
-admin.site.register(Student)
 admin.site.register(ProjectManager)
 admin.site.register(ParticipantProject)
