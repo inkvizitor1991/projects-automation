@@ -2,6 +2,26 @@ from django.conf import settings
 from django.db import models
 
 
+class Project(models.Model):
+    name = models.CharField(
+        'название',
+        max_length=50
+    )
+    start_date = models.DateField(
+        'дата начала проекта',
+        db_index=True,
+    )
+    end_date = models.DateField(
+        'дата окончания проекта',
+        db_index=True,
+    )
+
+    class Meta:
+        verbose_name = 'Проект'
+        verbose_name_plural = 'Проекты'
+
+    def __str__(self):
+        return f'{self.name} [{self.start_date} - {self.end_date}]'
 
 
 class Category(models.Model):
@@ -76,6 +96,13 @@ class ProjectManager(models.Model):
 
 
 class Command(models.Model):
+    project = models.ForeignKey(
+        Project,
+        verbose_name='проект',
+        related_name='commands',
+        null=True,
+        on_delete=models.SET_NULL,
+    )
     command_name = models.CharField(
         'Название команды',
         max_length=50,
