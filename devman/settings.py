@@ -16,6 +16,7 @@ ALLOWED_HOSTS = []
 
 
 INSTALLED_APPS = [
+    'integrationapp.apps.IntegrationappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
