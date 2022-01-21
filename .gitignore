@@ -141,5 +141,11 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 .DS_Store
+<<<<<<< HEAD
 test.py
 algoritm.py
+=======
+.test.py
+pr.py
+
+>>>>>>> f99cc42ae3fbad4c7912a5566942fc440075508a

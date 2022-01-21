@@ -2,6 +2,26 @@ from django.conf import settings
 from django.db import models
 
 
+class Project(models.Model):
+    name = models.CharField(
+        'название',
+        max_length=50
+    )
+    start_date = models.DateField(
+        'дата начала проекта',
+        db_index=True,
+    )
+    end_date = models.DateField(
+        'дата окончания проекта',
+        db_index=True,
+    )
+
+    class Meta:
+        verbose_name = 'Проект'
+        verbose_name_plural = 'Проекты'
+
+    def __str__(self):
+        return f'{self.name} [{self.start_date} - {self.end_date}]'
 
 
 class Category(models.Model):
@@ -35,6 +55,9 @@ class Student(models.Model):
         blank=True,
         on_delete=models.SET_NULL,
     )
+    tg_username = models.CharField('Телеграм ник', max_length=255)
+    tg_chat_id = models.CharField('Телеграм chat_id', max_length=255)
+    discord_username = models.CharField('Discort ник', max_length=255, default='example#1234')
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -43,9 +66,7 @@ class Student(models.Model):
         verbose_name = 'Студент'
         verbose_name_plural = 'Студенты'
 
-    # telegram_user_name = models.CharField('Телеграм ник', max_length=255)
-    # telegram_chat_id = models.CharField('Телеграм chat_id', max_length=255)
-    # devman_user_name = models.CharField('Devman ник', max_length=255)
+
 
 
 
@@ -76,6 +97,13 @@ class ProjectManager(models.Model):
 
 
 class Command(models.Model):
+    project = models.ForeignKey(
+        Project,
+        verbose_name='проект',
+        related_name='commands',
+        null=True,
+        on_delete=models.SET_NULL,
+    )
     command_name = models.CharField(
         'Название команды',
         max_length=50,

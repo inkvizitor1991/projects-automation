@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import (
+    Project,
     Category,
     Student, ProjectManager,
     Command, ParticipantProject
@@ -37,7 +38,7 @@ class CommandAdmin(admin.ModelAdmin):
 
 
 
-
+admin.site.register(Project)
 admin.site.register(Command, CommandAdmin)
 admin.site.register(Category)
 admin.site.register(ProjectManager)
