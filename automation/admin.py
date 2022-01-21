@@ -15,11 +15,11 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = [
         'first_name',
         'last_name',
-        'category',
+        'level',
         'far_east',
     ]
     list_filter = [
-        'category',
+        'level',
         'far_east'
     ]
 

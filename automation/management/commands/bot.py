@@ -11,6 +11,8 @@ from telegram import Bot
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from django.core.management.base import BaseCommand
 
+from pr import tim, get_teams
+
 
 
 
@@ -31,7 +33,18 @@ logger = logging.getLogger(__name__)
 
 FIRST, SECOND = range(2)
 
-ONE, TWO, THREE, FOUR, TIME = range(5)
+ONE, TWO, THREE, FOUR, TIME, PM = range(6)
+
+
+def build_menu(buttons, n_cols,
+               header_buttons=None,
+               footer_buttons=None):
+    menu = [buttons[i:i + n_cols] for i in range(0, len(buttons), n_cols)]
+    if header_buttons:
+        menu.insert(0, [header_buttons])
+    if footer_buttons:
+        menu.append([footer_buttons])
+    return menu
 
 
 def start(update, _):
@@ -39,18 +52,30 @@ def start(update, _):
     user = update.message.from_user
     logger.info("Пользователь %s начал разговор", user.first_name)
     keyboard = [
+
         [
             InlineKeyboardButton("✅  Да", callback_data=str(ONE)),
             InlineKeyboardButton("❌  Нет", callback_data=str(THREE)),
         ]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
+    if False:
+        update.message.reply_text(
+            text=f'Привет👋 {user.first_name}. Я бот "Девми". Может участвовать в проекте?',
+            reply_markup=reply_markup
+        )
+        return FIRST
 
-    update.message.reply_text(
-        text=f'Привет👋 {user.first_name}. Я бот "Девми". Может участвовать в проекте?',
-        reply_markup=reply_markup
-    )
-    return FIRST
+    elif user.username in ['gtimg', 'soyvita']:
+        teams = list(tim)
+        buttons = [InlineKeyboardButton(team, callback_data=str(PM)) for team in teams]
+        reply_markup = InlineKeyboardMarkup(build_menu(buttons, n_cols=2))
+        update.message.reply_text(
+            text=f'Привет👋 {user.first_name}. На этой неделе у тебя следующим команды:',
+            reply_markup=reply_markup
+        )
+        return FIRST
+
 
 
 def start_over(update, _):
@@ -66,6 +91,17 @@ def start_over(update, _):
     query.edit_message_text(
         text='Привет👋. Я бот  "Девми". Может участвовать в проекте?',
         reply_markup=reply_markup
+    )
+    return FIRST
+
+
+def pm(update, _):
+    query = update.callback_query
+    query.answer()
+    text = get_teams()
+
+    query.edit_message_text(
+        text=text
     )
     return FIRST
 
@@ -198,6 +234,7 @@ class Command(BaseCommand):
                                          pattern='^' + str(THREE) + '$'),
                     CallbackQueryHandler(four, pattern='^' + str(FOUR) + '$'),
                     CallbackQueryHandler(time, pattern='^' + str(TIME) + '$'),
+                    CallbackQueryHandler(pm, pattern='^' + str(PM) + '$'),
                 ],
                 SECOND: [
                     CallbackQueryHandler(start_over,

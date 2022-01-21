@@ -47,14 +47,17 @@ class Student(models.Model):
     first_name = models.CharField('Имя', max_length=50)
     last_name = models.CharField('Фамилия', max_length=50)
     far_east = models.BooleanField('Дальний восток', default=False)
-    category = models.ForeignKey(
+    level = models.ForeignKey(
         Category,
-        verbose_name='категория',
-        related_name='students',
+        verbose_name='Уровень',
+        related_name='Уровни',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
     )
+    tg_username = models.CharField('Телеграм ник', max_length=255)
+    tg_chat_id = models.CharField('Телеграм chat_id', max_length=255)
+    discord_username = models.CharField('Discort ник', max_length=255, default='example#1234')
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -63,9 +66,7 @@ class Student(models.Model):
         verbose_name = 'Студент'
         verbose_name_plural = 'Студенты'
 
-    # telegram_user_name = models.CharField('Телеграм ник', max_length=255)
-    # telegram_chat_id = models.CharField('Телеграм chat_id', max_length=255)
-    # devman_user_name = models.CharField('Devman ник', max_length=255)
+
 
 
 
