@@ -79,13 +79,15 @@ class ProjectManager(models.Model):
         'Фамилия',
         max_length=50
     )
-    start_at = models.DateTimeField(
+    start_at = models.CharField(
         verbose_name='Созвон ОТ',
-        db_index=True,
+        max_length=50,
+        blank=True,
     )
-    end_at = models.DateTimeField(
+    end_at = models.CharField(
         verbose_name='Созвон ДО',
-        db_index=True,
+        max_length=50,
+        blank=True,
     )
 
     class Meta:
@@ -107,7 +109,6 @@ class Command(models.Model):
     command_name = models.CharField(
         'Название команды',
         max_length=50,
-        null=True,
         blank=True,
     )
 
@@ -144,9 +145,10 @@ class ParticipantProject(models.Model):
         blank=True,
         on_delete=models.SET_NULL,
     )
-    meeting_time = models.DateTimeField(
+    meeting_time = models.CharField(
         verbose_name='Время созвона',
-        db_index=True,
+        max_length=50,
+        blank=True,
     )
 
     class Meta:
