@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Trello
+from .models import Discord
+
+
+admin.site.register(Trello)
+admin.site.register(Discord)
