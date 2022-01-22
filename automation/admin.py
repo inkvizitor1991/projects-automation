@@ -32,6 +32,7 @@ class ParticipantProjectInline(admin.TabularInline):
 
 
 class CommandAdmin(admin.ModelAdmin):
+
     inlines = [
         ParticipantProjectInline
     ]
