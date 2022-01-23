@@ -9,8 +9,8 @@ from environs import Env
 env = Env()
 env.read_env()
 
-TRELLO_API_KEY = env.str('TRELLO_API_KEY')
-TRELLO_SERVER_TOKEN = env.str('TRELLO_SERVER_TOKEN')
+TRELLO_API_KEY = 1#env.str('TRELLO_API_KEY')
+TRELLO_SERVER_TOKEN = 1#env.str('TRELLO_SERVER_TOKEN')
 
 
 def create_workspace(workspace_name):

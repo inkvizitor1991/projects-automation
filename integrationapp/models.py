@@ -1,9 +1,10 @@
 from django.db import models
+from automation.models import Project
 
 
 class Trello(models.Model):
     project = models.OneToOneField(
-        'automation.Project',
+        Project,
         verbose_name='проект',
         related_name='trello',
         null=True,
@@ -23,7 +24,7 @@ class Trello(models.Model):
 
 class Discord(models.Model):
     project = models.OneToOneField(
-        'automation.Project',
+        Project,
         verbose_name='проект',
         related_name='discord',
         null=True,

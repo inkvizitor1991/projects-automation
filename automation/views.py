@@ -8,6 +8,26 @@ from django.views.generic import ListView, CreateView
 from .form import RegisterUserForm, LoginUserForm
 from .models import *
 from .utils import DataMixin
+from integrationapp.views import *
+
+
+def create_teams(request):
+    project = Project.objects.last()
+    projects = []
+    participants = ParticipantProject.objects.filter(
+        project_manager__first_name='Tim')
+
+    for participant in participants:
+        projects.append(participant.command.command_name)
+    unique_projects = list(set(projects))
+    print(f'{unique_projects}')
+
+
+    context = {
+        # 'title': 'Inicio',
+        # 'menu': menu,
+    }
+    return render(request, 'automation/teams.html', context=context)
 
 
 class Home(DataMixin, ListView):
