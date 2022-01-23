@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Trello template creator</title>
+</head>
+<body>
+
+  {% if created_now %}
+    <p>New trello created successfully!</p>
+  {% else %}
+    <p>Trello has been created before!</p>
+  {% endif %}
+
+  <p>Workspace url: {{trello.url}}</p>
+  
+</body>
+</html>

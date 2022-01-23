@@ -1,5 +1,10 @@
 from pathlib import Path
 
+from environs import Env
+
+env = Env()
+env.read_env()
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -102,3 +107,8 @@ STATIC_URL = '/static/'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+TRELLO_API_KEY = env.str('TRELLO_API_KEY')
+TRELLO_SERVER_TOKEN = env.str('TRELLO_SERVER_TOKEN')

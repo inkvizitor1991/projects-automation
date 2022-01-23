@@ -142,10 +142,10 @@ dmypy.json
 cython_debug/
 .DS_Store
 1.py
-scripts/distribution_students.py
+
 test.py
 test3.py
-scripts/build_team.py
+
 
 .test.py
 pr.py

@@ -49,6 +49,7 @@ class Student(models.Model):
         blank=True,
         on_delete=models.SET_NULL,
     )
+    email = models.EmailField('Email')
     tg_username = models.CharField('Телеграм ник', max_length=255)
     tg_chat_id = models.CharField('Телеграм chat_id', max_length=255)
     discord_username = models.CharField('Discort ник', max_length=255, default='example#1234')
