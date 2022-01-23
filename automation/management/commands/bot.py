@@ -10,7 +10,7 @@ from telegram import Bot
 from telegram.ext import Updater, CommandHandler
 from django.core.management.base import BaseCommand
 
-from .pr import tim, get_text
+from .pr import get_text
 
 
 
@@ -68,7 +68,7 @@ def start(update, _):
         return FIRST
 
     elif user.username in ['gtimg', 'soyvita']:
-        teams = list(tim)
+        #teams = list(tim)
         global pm
         pm = user.username
 
