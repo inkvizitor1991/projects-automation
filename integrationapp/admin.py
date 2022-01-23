@@ -4,5 +4,11 @@ from .models import Trello
 from .models import Discord
 
 
-admin.site.register(Trello)
-admin.site.register(Discord)
+@admin.register(Trello)
+class TrelloAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Discord)
+class DiscordAdmin(admin.ModelAdmin):
+    pass
