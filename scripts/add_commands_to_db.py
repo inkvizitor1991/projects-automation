@@ -1,4 +1,4 @@
-from form_groups import form_gorups
+from .form_groups import form_gorups
 from automation.models import Project, Category, Student, ProjectManager, Command, ParticipantProject
 
 
@@ -37,8 +37,6 @@ def create_groups(pm_name, groups, project_name):
 
 junior = form_gorups(students_junior)
 new_students = form_gorups(new_students)
-print(junior)
-print(new_students)
 junior_groups_for_tim_week_2 = junior['groups_for_tim_week_2']
 junior_groups_for_tim_week_1 = junior['groups_for_tim_week_1']
 junior_groups_for_kate_week_2 = junior['groups_for_kate_week_2']
@@ -49,21 +47,8 @@ beginner_groups_for_tim_week_1 = new_students['groups_for_tim_week_1']
 beginner_groups_for_kate_week_2 = new_students['groups_for_kate_week_2']
 beginner_groups_for_kate_week_1 = new_students['groups_for_kate_week_1']
 
-tim = 'Тим'
-kate = 'Катя'
-second_project = 'week_2'
-first_project = 'week_1'
-
-created_groups_junior_for_tim_week_2 = create_groups(tim, junior_groups_for_tim_week_2,second_project)
-created_groups_junior_for_tim_week_1 = create_groups(tim, junior_groups_for_tim_week_1, first_project)
-created_groups_junior_for_kate_week_2 = create_groups(kate, junior_groups_for_kate_week_2, second_project)
-created_groups_junior_for_kate_week_1 = create_groups(kate, junior_groups_for_kate_week_1, first_project)
 
 
-created_groups_beginner_for_tim_week_2 = create_groups(tim, beginner_groups_for_tim_week_2,second_project)
-created_groups_beginner_for_tim_week_1 = create_groups(tim, beginner_groups_for_tim_week_1, first_project)
-created_groups_beginner_for_kate_week_2 = create_groups(kate, beginner_groups_for_kate_week_2, second_project)
-created_groups_beginner_for_kate_week_1 = create_groups(kate, beginner_groups_for_kate_week_1, first_project)
 
 
 
