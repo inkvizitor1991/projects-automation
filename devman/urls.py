@@ -8,6 +8,7 @@ from automation.views import page_no_found
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('automation.urls')),
+    path('integrations/', include('integrationapp.urls')),
 ]
 
 if settings.DEBUG:
@@ -15,4 +16,3 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = page_no_found
-
