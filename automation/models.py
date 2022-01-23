@@ -89,7 +89,7 @@ class ProjectManager(models.Model):
         verbose_name_plural = 'ПМы'
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return self.first_name
 
 
 class Command(models.Model):

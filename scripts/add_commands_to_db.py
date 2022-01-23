@@ -2,10 +2,6 @@ from form_groups import form_gorups
 from automation.models import Project, Category, Student, ProjectManager, Command, ParticipantProject
 
 
-
-
-
-
 students = Student.objects.filter(category__name='Джуниор')
 students_new = Student.objects.filter(category__name='Новичек')
 students_new_3 = Student.objects.filter(category__name='Новичек +3')
@@ -22,12 +18,6 @@ for student in students_new:
 
 for student in students_new_3:
     new_students.append(student.id)
-
-
-
-
-
-
 
 
 def create_groups(pm_name, groups, project_name):
