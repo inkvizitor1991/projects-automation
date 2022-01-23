@@ -148,6 +148,6 @@ test3.py
 
 
 .test.py
-pr.py
+automation/management/commands/pr.py
 
 

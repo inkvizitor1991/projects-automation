@@ -2,16 +2,15 @@ import logging
 import os
 
 from dotenv import load_dotenv
-from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, KeyboardButton, InlineKeyboardButton, \
-    InlineKeyboardMarkup, InputMediaPhoto, ParseMode
+from telegram import InlineKeyboardButton, \
+    InlineKeyboardMarkup
 from telegram.ext import ConversationHandler, CallbackQueryHandler
-from telegram.utils import helpers
 from telegram.utils.request import Request
 from telegram import Bot
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler
 from django.core.management.base import BaseCommand
 
-from pr import tim, get_teams
+from .pr import tim, get_text
 
 
 
@@ -34,6 +33,8 @@ logger = logging.getLogger(__name__)
 FIRST, SECOND = range(2)
 
 ONE, TWO, THREE, FOUR, TIME, PM = range(6)
+
+
 
 
 def build_menu(buttons, n_cols,
@@ -68,8 +69,16 @@ def start(update, _):
 
     elif user.username in ['gtimg', 'soyvita']:
         teams = list(tim)
-        buttons = [InlineKeyboardButton(team, callback_data=str(PM)) for team in teams]
-        reply_markup = InlineKeyboardMarkup(build_menu(buttons, n_cols=2))
+        global pm
+        pm = user.username
+
+        keyboard = [
+
+            [
+                InlineKeyboardButton("Показать команды", callback_data=str(PM))
+            ]
+        ]
+        reply_markup = InlineKeyboardMarkup(keyboard)
         update.message.reply_text(
             text=f'Привет👋 {user.first_name}. На этой неделе у тебя следующим команды:',
             reply_markup=reply_markup
@@ -96,9 +105,15 @@ def start_over(update, _):
 
 
 def pm(update, _):
+    global pm
+    print(pm)
+    if pm == 'soyvita': #'gtimg':
+        pm = 'Тим'
+    elif pm == 'soyvita':
+        print('jajajaja')
     query = update.callback_query
     query.answer()
-    text = get_teams()
+    text = get_text(pm)
 
     query.edit_message_text(
         text=text

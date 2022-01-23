@@ -16,8 +16,8 @@ from .utils.trello_lib import BOARD_BG_COLOURS
 
 
 
-TRELLO_API_KEY = 1#env.str('TRELLO_API_KEY')
-TRELLO_SERVER_TOKEN = 1#env.str('TRELLO_SERVER_TOKEN')
+TRELLO_API_KEY = settings.TRELLO_API_KEY
+TRELLO_SERVER_TOKEN = settings.TRELLO_SERVER_TOKEN
 
 
 def invite_command_members_to_board_via_email(board_id, command_members):
