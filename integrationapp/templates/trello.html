@@ -15,6 +15,10 @@
   {% endif %}
 
   <p>Workspace url: {{trello.url}}</p>
-  
+  <br>
+  {% if sent_email %}
+    <p>Emails was sent successfully!</p>
+  {% endif %}
+
 </body>
 </html>
