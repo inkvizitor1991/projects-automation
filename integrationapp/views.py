@@ -16,7 +16,6 @@ from .utils.trello_lib import invite_member_to_board_via_email
 from .utils.trello_lib import BOARD_BG_COLOURS
 
 
-
 TRELLO_API_KEY = settings.TRELLO_API_KEY
 TRELLO_SERVER_TOKEN = settings.TRELLO_SERVER_TOKEN
 
@@ -112,7 +111,6 @@ def handle_trello_create_request(request, project_id):
     except Trello.DoesNotExist as err:
         trello = create_trello(project)
         trello_boards = create_trello_boards(trello)
-        print(trello_boards)
 
         if is_invite_command_members:
             invite_project_members_to_trello_boards_via_emails(trello)
