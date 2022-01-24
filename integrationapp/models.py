@@ -8,7 +8,7 @@ class Trello(models.Model):
         verbose_name='проект',
         related_name='trello',
         null=True,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
     )
     workspace_id = models.CharField(
         'workspace id',
